@@ -22,4 +22,8 @@ class ClaseProgramada extends Model
     public function tipo_clases(){
         return $this->belongsTo(TipoClase::class);
     }
+
+    public function miembros(){
+        return $this->belongsToMany(User::class, 'reservas');
+    }
 }

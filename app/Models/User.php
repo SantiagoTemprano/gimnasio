@@ -52,4 +52,8 @@ class User extends Authenticatable
         return $this->hasMany(ClaseProgramada::class, 'instructor_id');
     }
 
+    public function reservas(){
+        return $this->belongsToMany(ClaseProgramada::class, 'reservas');
+    }
+
 }
