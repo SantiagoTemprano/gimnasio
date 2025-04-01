@@ -49,7 +49,7 @@ class User extends Authenticatable
     }
 
     public function clasesProgramadas(){
-        $this->hasMany(ClaseProgramada::class, 'instructor_id');
+        return $this->hasMany(ClaseProgramada::class, 'instructor_id');
     }
 
 }

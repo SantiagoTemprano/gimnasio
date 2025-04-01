@@ -15,6 +15,14 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    @can('programar-clase')
+                    <x-nav-link :href="route('programadas.create')" :active="request()->routeIs('programadas.create')">
+                        Programa una clase
+                    </x-nav-link>
+                    <x-nav-link :href="route('programadas.index')" :active="request()->routeIs('programadas.index')">
+                        Clases programadas
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

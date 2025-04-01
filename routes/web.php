@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ClasesProgramadasController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckRolUsuario;
 use App\Http\Controllers\ProfileController;
@@ -31,3 +32,7 @@ Route::get('/miembro/dashboard', function () {
     return view('miembro.dashboard');
 })->middleware(['auth', 'rol'.':miembro'])->name('miembro.dashboard');
 
+Route::resource('/instructor/programadas', ClasesProgramadasController::class)
+->only(['index','create','store'])
+->middleware(['auth', 'rol'.':instructor']);
+Route::delete('/instructor/programadas/{claseProgramada}', [ClasesProgramadasController::class, 'destroy'])->name('programadas.destroy');

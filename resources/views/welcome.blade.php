@@ -30,6 +30,12 @@
                     >
                         Log in
                     </a>
+                        <a
+                        href="{{ route('register') }}"
+                        class="text-indigo-600 hover:text-indigo-800 mr-4"
+                    >
+                        Register
+                    </a>
 
                 @endauth
             </div>

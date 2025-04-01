@@ -8,11 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class ClaseProgramada extends Model
 {
+
+    protected $guarded = null;
+    protected $casts = [
+        'date_time' => 'datetime'
+    ];
+
     public function instructor(){
-        $this->belongsTo(User::class, 'instructor_id');
+        return $this->belongsTo(User::class, 'instructor_id');
     }
 
-    public function tipoClase(){
-        $this->belongsTo(TipoClase::class);
+    public function tipo_clases(){
+        return $this->belongsTo(TipoClase::class);
     }
 }
