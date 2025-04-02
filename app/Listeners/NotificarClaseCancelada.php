@@ -3,8 +3,8 @@
 namespace App\Listeners;
 
 use App\Events\ClaseCancelada;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
+use App\Mail\ClaseCanceladaMail;
+use Illuminate\Support\Facades\Mail;
 
 class NotificarClaseCancelada
 {
@@ -21,7 +21,14 @@ class NotificarClaseCancelada
      */
     public function handle(ClaseCancelada $event): void
     {
-        $claseProgramada = $event->claseProgramada;
+        $miembro = $event->claseProgramada->miembros();
+
+        $nombreClase = $event->claseProgramada->tipo_clases->nombre;
+        $diaClase = $event->claseProgramada->date_time;
+        $detalles = compact('nombreClase','diaClase');
         
+        $miembro->each(function($user) use ($detalles){
+            Mail::to($user)->send(new ClaseCanceladaMail($detalles));
+        });
     }
 }
