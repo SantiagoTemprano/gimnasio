@@ -40,9 +40,9 @@ Route::middleware(['auth', 'rol'.':miembro'])->group(function(){
         return view('miembro.dashboard');
     })->name('miembro.dashboard');
     
-    Route::get('/miembro/reservas', [ReservaController::class,'create'])->name('reserva.create');
+    Route::get('/miembro/reservar', [ReservaController::class,'create'])->name('reserva.create');
     Route::post('/miembro/reservas', [ReservaController::class,'store'])->name('reserva.store');
     Route::get('/miembro/reservas', [ReservaController::class,'index'])->name('reserva.index');
-    Route::delete('/miembro/reservass', [ReservaController::class,'delete'])->name('reserva.destroy');
+    Route::delete('/miembro/reservas/{id}', [ReservaController::class,'destroy'])->name('reserva.destroy');
 
 });

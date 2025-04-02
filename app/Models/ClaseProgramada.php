@@ -4,7 +4,9 @@ namespace App\Models;
 
 use App\Models\User;
 use App\Models\TipoClase;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ClaseProgramada extends Model
@@ -26,4 +28,16 @@ class ClaseProgramada extends Model
     public function miembros(){
         return $this->belongsToMany(User::class, 'reservas');
     }
+
+    public function scopeProximas(Builder $query){
+        return $query->where('date_time','>',now());
+    }
+
+    public function scopeNoProgramadas(Builder $query){
+        return $query->whereDoesntHave('miembros', function($query) {
+            $query->where('user_id',Auth::id());
+        });
+    }
+
+    
 }

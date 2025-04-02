@@ -24,6 +24,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('programar-clase', function(User $user){
             return $user->rol === 'instructor';
         });
-
+        Gate::define('reservar-clase', function(User $user){
+            return $user->rol === 'miembro';
+        });
     }
 }

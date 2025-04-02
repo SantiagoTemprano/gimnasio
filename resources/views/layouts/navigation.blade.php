@@ -23,6 +23,14 @@
                         Clases programadas
                     </x-nav-link>
                     @endcan
+                    @can('reservar-clase')
+                    <x-nav-link :href="route('reserva.create')" :active="request()->routeIs('reserva.create')">
+                        Reserva una clase
+                    </x-nav-link>
+                    <x-nav-link :href="route('reserva.index')" :active="request()->routeIs('reserva.index')">
+                        Clases reservadas
+                    </x-nav-link>
+                    @endcan
                 </div>
             </div>
 

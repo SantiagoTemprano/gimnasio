@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ClaseCancelada;
 use App\Models\ClaseProgramada;
 use App\Models\TipoClase;
 use Illuminate\Http\Request;
@@ -58,8 +59,10 @@ class ClasesProgramadasController extends Controller
         if(Auth::user()->cannot('delete', $claseProgramada)){
             abort(403);
         }
+        ClaseCancelada::dispatch($claseProgramada);
 
         $claseProgramada->delete();
+        $claseProgramada->miembros()->detach();
         
         return redirect()->route('programadas.index');
     }
